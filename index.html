@@ -1,40 +1,11 @@
-
-Новый документ.txt
-
-100%
 ﻿<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>מחולל דוח שעות</title>
-  <script>
-  const manifest = {
-    "name": "מחולל דוח שעות",
-    "short_name": "דוח שעות",
-    "description": "מחולל דוח שעות עבודה עם ייצוא לאקסל",
-    "lang": "he",
-    "dir": "rtl",
-    "start_url": "./index.html",
-    "scope": "./",
-    "display": "standalone",
-    "background_color": "#f6f7f9",
-    "theme_color": "#2563eb",
-    "icons": [
-      {
-        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9IjExMiIgZmlsbD0iIzI1NjNlYiIvPjxjaXJjbGUgY3g9IjI1NiIgY3k9IjIzNiIgcj0iMTMyIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMjIiLz48bGluZSB4MT0iMjU2IiB5MT0iMjM2IiB4Mj0iMjAwIiB5Mj0iMTgyIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMjAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxsaW5lIHgxPSIyNTYiIHkxPSIyMzYiIHgyPSIzMzAiIHkyPSIyMDAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGNpcmNsZSBjeD0iMjU2IiBjeT0iMjM2IiByPSIxNCIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==",
-        "sizes": "512x512",
-        "type": "image/svg+xml",
-        "purpose": "any maskable"
-      }
-    ]
-  };
-  const blob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
-  const url = URL.createObjectURL(blob);
-  document.write(`<link rel="manifest" href="${url}">`);
-</script>
+<link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#2563eb">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%232563eb'/%3E%3Ccircle cx='256' cy='236' r='132' fill='none' stroke='%23fff' stroke-width='22'/%3E%3Cline x1='256' y1='236' x2='200' y2='182' stroke='%23fff' stroke-width='20' stroke-linecap='round'/%3E%3Cline x1='256' y1='236' x2='330' y2='200' stroke='%23fff' stroke-width='14' stroke-linecap='round'/%3E%3Ccircle cx='256' cy='236' r='14' fill='%23fff'/%3E%3C/svg%3E">
 <style>
 :root{--bg:#f6f7f9;--card:#fff;--tx:#1d2330;--mut:#667085;--bd:#dde1e8;--ac:#2563eb;--act:#fff;--ok:#15803d;--er:#b91c1c;--off:#eef0f4;--ot:#fff4d6;--ot2:#ffe0cc}
 @media (prefers-color-scheme:dark){:root{--bg:#14171c;--card:#1d2128;--tx:#e8ebf0;--mut:#9aa3b2;--bd:#323944;--ac:#5b8def;--act:#0b1220;--ok:#4ade80;--er:#f87171;--off:#262b34;--ot:#4a3f1a;--ot2:#58362a;color-scheme:dark}}
@@ -274,7 +245,7 @@ $('go').onclick=generate;$('dl').onclick=download;
 generate();
 
 
-// PWA: регистрация Service Worker для офлайн-работы и установки
+// Регистрация Service Worker
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').catch(err => {
@@ -285,10 +256,3 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
-החשבון המחובר כרגע:
-mohi19470@gmail.com
-
-Mohi Guma
-בחירה בחשבון אחר
-אישור
-המערכת מציגה את Новый документ.txt.
