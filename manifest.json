@@ -1,6 +1,6 @@
 {
-  "name": "מחולל דוח שעות",
-  "short_name": "דוח שעות",
+  "name": "timesheet_app",
+  "short_name": "timesheet_app",
   "description": "מחולל דוח שעות עבודה עם ייצוא לאקסל",
   "start_url": "./index.html",
   "display": "standalone",
