@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+
+Новый документ.txt
+
+100%
+﻿<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
@@ -84,6 +88,7 @@ const num=s=>parseFloat(String(s).replace(',','.'));
 const p2=n=>String(n).padStart(2,'0');
 const hm=m=>Math.floor(m/60)+':'+p2(m%60);
 let ROWS=[],YM=null;
+
 
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=rnd(0,i);[a[i],a[j]]=[a[j],a[i]];}return a;}
 function splitInt(total,n,lo,hi){
@@ -182,6 +187,7 @@ function generate(){
   }catch(e){msg.className='er';msg.textContent=typeof e==='string'?e:'שגיאה ביצירת הדוח, נסו שוב.';}
 }
 
+
 /* ---- כתיבת קובץ xlsx ללא ספריות חיצוניות ---- */
 const CRC=(()=>{const t=[];for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0;}return t;})();
 function crc32(b){let c=0xFFFFFFFF;for(let i=0;i<b.length;i++)c=CRC[(c^b[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0;}
@@ -243,26 +249,22 @@ const now=new Date();$('m').value=now.getFullYear()+'-'+p2(now.getMonth()+1);
 $('go').onclick=generate;$('dl').onclick=download;
 generate();
 
-// PWA: inline service worker (data URL) — кэширует сам страницу
+
+// PWA: регистрация Service Worker для офлайн-работы и установки
 if ('serviceWorker' in navigator) {
-  const swCode = `
-    const CACHE='timesheet-v1';
-    self.addEventListener('install',e=>{self.skipWaiting();});
-    self.addEventListener('activate',e=>{e.waitUntil(self.clients.claim());});
-    self.addEventListener('fetch',e=>{
-      e.respondWith(
-        caches.match(e.request).then(r=>r||fetch(e.request).then(resp=>{
-          const copy=resp.clone();
-          caches.open(CACHE).then(c=>c.put(e.request,copy)).catch(()=>{});
-          return resp;
-        }).catch(()=>caches.match('./index.html')))
-      );
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(err => {
+      console.error('SW registration failed:', err);
     });
-  `;
-  const blob = new Blob([swCode], {type:'application/javascript'});
-  const swUrl = URL.createObjectURL(blob);
-  navigator.serviceWorker.register(swUrl).catch(()=>{});
+  });
 }
 </script>
 </body>
 </html>
+החשבון המחובר כרגע:
+mohi19470@gmail.com
+
+Mohi Guma
+בחירה בחשבון אחר
+אישור
+המערכת מציגה את Новый документ.txt.
