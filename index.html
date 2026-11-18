@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מחולל דוח שעות</title>
+<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22%D7%9E%D7%97%D7%95%D7%9C%D7%9C%20%D7%93%D7%95%D7%97%20%D7%A9%D7%A2%D7%95%D7%AA%22%2C%22short_name%22%3A%22%D7%93%D7%95%D7%97%20%D7%A9%D7%A2%D7%95%D7%AA%22%2C%22description%22%3A%22%D7%9E%D7%97%D7%95%D7%9C%D7%9C%20%D7%93%D7%95%D7%97%20%D7%A9%D7%A2%D7%95%D7%AA%20%D7%A2%D7%91%D7%95%D7%93%D7%94%20%D7%A2%D7%9D%20%D7%99%D7%99%D7%A6%D7%95%D7%90%20%D7%9C%D7%90%D7%A7%D7%A1%D7%9C%22%2C%22lang%22%3A%22he%22%2C%22dir%22%3A%22rtl%22%2C%22start_url%22%3A%22.%2Findex.html%22%2C%22scope%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait-primary%22%2C%22background_color%22%3A%22%23f6f7f9%22%2C%22theme_color%22%3A%22%232563eb%22%2C%22categories%22%3A%5B%22productivity%22%2C%22business%22%5D%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%2527http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%2527%2520viewBox%253D%25270%25200%2520512%2520512%2527%253E%253Crect%2520width%253D%2527512%2527%2520height%253D%2527512%2527%2520rx%253D%2527112%2527%2520fill%253D%2527%25232563eb%2527%252F%253E%253Ccircle%2520cx%253D%2527256%2527%2520cy%253D%2527236%2527%2520r%253D%2527132%2527%2520fill%253D%2527none%2527%2520stroke%253D%2527%2523fff%2527%2520stroke-width%253D%252722%2527%252F%253E%253Cline%2520x1%253D%2527256%2527%2520y1%253D%2527236%2527%2520x2%253D%2527200%2527%2520y2%253D%2527182%2527%2520stroke%253D%2527%2523fff%2527%2520stroke-width%253D%252720%2527%2520stroke-linecap%253D%2527round%2527%252F%253E%253Cline%2520x1%253D%2527256%2527%2520y1%253D%2527236%2527%2520x2%253D%2527330%2527%2520y2%253D%2527200%2527%2520stroke%253D%2527%2523fff%2527%2520stroke-width%253D%252714%2527%2520stroke-linecap%253D%2527round%2527%252F%253E%253Ccircle%2520cx%253D%2527256%2527%2520cy%253D%2527236%2527%2520r%253D%252714%2527%2520fill%253D%2527%2523fff%2527%252F%253E%253C%252Fsvg%253E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%22%7D%5D%7D">
+<meta name="theme-color" content="#2563eb">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%232563eb'/%3E%3Ccircle cx='256' cy='236' r='132' fill='none' stroke='%23fff' stroke-width='22'/%3E%3Cline x1='256' y1='236' x2='200' y2='182' stroke='%23fff' stroke-width='20' stroke-linecap='round'/%3E%3Cline x1='256' y1='236' x2='330' y2='200' stroke='%23fff' stroke-width='14' stroke-linecap='round'/%3E%3Ccircle cx='256' cy='236' r='14' fill='%23fff'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--tx:#1d2330;--mut:#667085;--bd:#dde1e8;--ac:#2563eb;--act:#fff;--ok:#15803d;--er:#b91c1c;--off:#eef0f4;--ot:#fff4d6;--ot2:#ffe0cc}
+@media (prefers-color-scheme:dark){:root{--bg:#14171c;--card:#1d2128;--tx:#e8ebf0;--mut:#9aa3b2;--bd:#323944;--ac:#5b8def;--act:#0b1220;--ok:#4ade80;--er:#f87171;--off:#262b34;--ot:#4a3f1a;--ot2:#58362a;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.4 Arial,Helvetica,sans-serif;padding:16px;max-width:900px;margin-inline:auto}
+h1{font-size:20px;margin:0 0 12px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+label{display:block;font-size:12px;color:var(--mut);margin-bottom:3px}
+input,select{width:100%;padding:9px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+button{padding:10px 16px;border:1px solid var(--ac);border-radius:8px;background:var(--ac);color:var(--act);font:inherit;font-weight:700;cursor:pointer}
+button.sec{background:transparent;color:var(--ac)}
+#msg{margin-top:10px;font-size:14px}
+.er{color:var(--er)}.ok{color:var(--ok)}
+.hint{font-size:12px;color:var(--mut);margin-top:8px}
+.wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px;text-align:center}
+th,td{border:1px solid var(--bd);padding:5px 6px;font-size:14px}
+th{background:var(--off)}
+tr.off td{background:var(--off);color:var(--mut)}
+td.o1{background:var(--ot)}td.o2{background:var(--ot2)}
+tfoot td{font-weight:700;background:var(--off)}
+.legal{margin-top:18px;font-size:12px;color:var(--mut);text-align:center}
+.legal details{text-align:start;margin-top:8px;background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:10px 12px}
+.legal summary{cursor:pointer;font-weight:700;color:var(--tx)}
+.legal ol{margin:8px 0 0;padding-inline-start:20px;line-height:1.6}
+</style>
+</head>
+<body>
+<h1>מחולל דוח שעות עבודה</h1>
+<div class="card">
+  <div class="grid">
+    <div><label>סה"כ שעות</label><input id="t" inputmode="decimal" value="210.98"></div>
+    <div><label>שעות 125%</label><input id="h1" inputmode="decimal" value="22.03"></div>
+    <div><label>שעות 150%</label><input id="h2" inputmode="decimal" value="8.02"></div>
+    <div><label>חודש</label><input id="m" type="month"></div>
+    <div><label>ימי מנוחה (ריק = אוטומטי)</label><input id="off" inputmode="numeric" placeholder="אוטומטי"></div>
+  </div>
+  <div class="btns">
+    <button id="go">צור דוח</button>
+    <button id="dl" class="sec">הורד Excel</button>
+  </div>
+  <div id="msg"></div>
+  <div class="hint">כניסה לא לפני 9:00 ויציאה לא אחרי 23:59. לא יותר מ-6 ימי עבודה ברצף, וימי מנוחה לא ברצף. אפשר ללחוץ "צור דוח" שוב ושוב, בכל פעם תתקבל חלוקה חדשה. הקובץ עובד ללא אינטרנט וללא התקנה.</div>
+</div>
+<div class="card wrap" id="out" style="display:none">
+  <table>
+    <thead><tr><th>תאריך</th><th>יום</th><th>כניסה</th><th>יציאה</th><th>סה"כ</th><th>חודשי</th><th>125%</th><th>150%</th></tr></thead>
+    <tbody id="tb"></tbody>
+    <tfoot id="tf"></tfoot>
+  </table>
+</div>
+<div class="legal">
+  <div>© 2026 Azriel Lozovski. כל הזכויות שמורות.</div>
+  <details>
+    <summary>תנאי שימוש</summary>
+    <ol>
+      <li><b>רישיון.</b> הרוכש מקבל רישיון אישי, לא בלעדי ובלתי ניתן להעברה להשתמש בתוכנה. התוכנה אינה נמכרת, ניתן רישיון שימוש בלבד.</li>
+      <li><b>בעלות.</b> כל הזכויות בתוכנה, בעיצובה ובטקסטים שבה שמורות ל-Azriel Lozovski.</li>
+      <li><b>איסורים.</b> אסור להעתיק, להפיץ, למכור, להשכיר או להעביר את התוכנה לאחרים, לפרק אותה או לבצע בה הנדסה לאחור, ואסור להסיר ממנה את הודעת זכויות היוצרים.</li>
+      <li><b>שימוש אחראי.</b> התוכנה מחלקת שעות בצורה אקראית על בסיס נתונים שמזין המשתמש. האחריות לכך שהדוח משקף שעות עבודה בפועל ולכך שהשימוש בו עומד בדין ובכללי המעסיק או המוסד חלה על המשתמש בלבד.</li>
+      <li><b>העדר אחריות.</b> התוכנה ניתנת "כמות שהיא" וללא התחייבות לדיוק או להתאמה למטרה מסוימת. ככל שהדין מתיר, אין אחריות לנזק כלשהו הנובע משימוש בתוכנה.</li>
+      <li><b>דין חל.</b> על תנאים אלה יחולו דיני מדינת ישראל, ולבתי המשפט המוסמכים ב[עיר] תהיה סמכות שיפוט בלעדית.</li>
+      <li><b>שינויים.</b> Azriel Lozovski רשאי לעדכן תנאים אלה מעת לעת.</li>
+    </ol>
+  </details>
+</div>
+<script>
+const DN=['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+const MN=['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
+const $=id=>document.getElementById(id);
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const num=s=>parseFloat(String(s).replace(',','.'));
+const p2=n=>String(n).padStart(2,'0');
+const hm=m=>Math.floor(m/60)+':'+p2(m%60);
+let ROWS=[],YM=null;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=rnd(0,i);[a[i],a[j]]=[a[j],a[i]];}return a;}
+function splitInt(total,n,lo,hi){
+  if(n===0)return total===0?[]:null;
+  if(total<n*lo||total>n*hi)return null;
+  const v=Array(n).fill(lo);let rem=total-n*lo;
+  while(rem>0){const i=rnd(0,n-1);if(v[i]>=hi)continue;const k=Math.min(rem,hi-v[i],rnd(1,45));v[i]+=k;rem-=k;}
+  return v;
+}
+function fixRound(v,off,lo,hi){
+  if(!v||v.length<2)return v;
+  for(let t=0;t<4000;t++){
+    const bad=[];v.forEach((x,i)=>{if((off+x)%60===0)bad.push(i);});
+    if(!bad.length)break;
+    const i=bad[rnd(0,bad.length-1)],j=rnd(0,v.length-1);
+    if(j===i)continue;
+    const k=rnd(1,20)*(rnd(0,1)?1:-1),xi=v[i]+k,xj=v[j]-k;
+    if(xi<lo||xi>hi||xj<lo||xj>hi||(off+xi)%60===0||(off+xj)%60===0)continue;
+    v[i]=xi;v[j]=xj;
+  }
+  return v;
+}
+function offLayout(D,k){
+  const N=D-k,seg=Array(k+1).fill(0);
+  for(let i=1;i<k;i++)seg[i]=1;
+  let rem=N-Math.max(k-1,0);
+  if(rem<0||N>6*(k+1))return null;
+  while(rem>0){const i=rnd(0,k);if(seg[i]>=6)continue;seg[i]++;rem--;}
+  const work=[];let d=0;
+  for(let i=0;i<=k;i++){for(let j=0;j<seg[i];j++)work.push(d++);d++;}
+  return work;
+}
+function plan(T,H1,H2,D,offReq){
+  const a=H2>0?Math.ceil(H2/120):0;
+  if(H1<120*a)throw 'שעות 125% חייבות להיות לפחות '+(2*a)+' (כל יום עם 150% כולל 2 שעות ב-125%).';
+  const H1r=H1-120*a;
+  let b=H1r>0?Math.ceil(H1r/120):0;
+  if(H1r>0)b=Math.min(b+rnd(0,2),Math.floor(H1r/6));
+  const lo2=a?Math.min(6,Math.floor(H2/a)):0;
+  const R=T-(600*a+H2+480*b+H1r);
+  const minOff=Math.ceil((D-6)/7);
+  for(const lo of [240,60]){
+    let best=null;
+    const list=offReq!=null?[D-offReq]:Array.from({length:D-minOff},(_,i)=>i+1);
+    for(const N of list){
+      const c=N-a-b,k=D-N;
+      if(c<0||k<minOff||k<1||N>6*(k+1))continue;
+      if(c===0?R!==0:(R<c*lo||R>c*480))continue;
+      const sc=c?Math.abs(R/c-450):0;
+      if(!best||sc<best.sc)best={N,c,k,sc};
+    }
+    if(!best)continue;
+    const w=offLayout(D,best.k);if(!w)continue;
+    const durs=[];
+    (fixRound(splitInt(H2,a,lo2,120),600,lo2,120)||[]).forEach(x=>durs.push(600+x));
+    (fixRound(splitInt(H1r,b,6,120),480,6,120)||[]).forEach(x=>durs.push(480+x));
+    (fixRound(splitInt(R,best.c,lo,480),0,lo,480)||[]).forEach(x=>durs.push(x));
+    if(durs.length!==best.N)continue;
+    shuffle(durs);
+    const res=Array(D).fill(null);
+    w.forEach((day,i)=>{const d=durs[i];const hi=Math.min(1439-d,13*60);const s=rnd(540,Math.max(540,hi));res[day]={s,e:s+d};});
+    return res;
+  }
+  throw offReq!=null?'עם מספר ימי המנוחה שנבחר ('+offReq+') לא ניתן להתאים את השעות. שנו את השעות או את מספר ימי המנוחה.':'לא ניתן לפרוס את השעות האלה בחודש. בדקו שהמספרים הגיוניים.';
+}
+function render(){
+  const [y,mo]=YM;
+  $('tb').innerHTML=ROWS.map(r=>{
+    const f=r.w?(r.w.e-r.w.s)/60:0;
+    const g=Math.max(Math.min(f-8,2),0),h=Math.max(Math.min(f-10,2),0);
+    r.f=f;r.g=g;r.h=h;
+    const dt=p2(r.d)+'/'+p2(mo+1)+'/'+y;
+    return '<tr class="'+(r.w?'':'off')+'"><td>'+dt+'</td><td>'+DN[r.dow]+'</td><td>'+(r.w?hm(r.w.s):'0:00')+'</td><td>'+(r.w?hm(r.w.e):'0:00')+'</td><td>'+(r.w?hm(r.w.e-r.w.s):'0:00')+'</td><td>'+f.toFixed(2)+'</td><td class="'+(g>0?'o1':'')+'">'+g.toFixed(2)+'</td><td class="'+(h>0?'o2':'')+'">'+h.toFixed(2)+'</td></tr>';
+  }).join('');
+  const S=k=>ROWS.reduce((s,r)=>s+r[k],0);
+  $('tf').innerHTML='<tr><td colspan="5">סה"כ חודשי</td><td>'+S('f').toFixed(2)+'</td><td>'+S('g').toFixed(2)+'</td><td>'+S('h').toFixed(2)+'</td></tr>';
+  $('out').style.display='';
+}
+function generate(){
+  const msg=$('msg');msg.className='';msg.textContent='';
+  try{
+    const T=Math.round(num($('t').value)*60),H1=Math.round(num($('h1').value||0)*60),H2=Math.round(num($('h2').value||0)*60);
+    if(!(T>0)||H1<0||H2<0||isNaN(H1)||isNaN(H2))throw 'יש להזין מספרי שעות תקינים.';
+    const ym=($('m').value||'').split('-').map(Number);
+    const y=ym[0],mo=ym[1]-1;
+    if(!y||isNaN(mo))throw 'יש לבחור חודש.';
+    const D=new Date(y,mo+1,0).getDate();
+    const ov=$('off').value.trim();const offReq=ov===''?null:parseInt(ov,10);
+    const res=plan(T,H1,H2,D,offReq);
+    YM=[y,mo];
+    ROWS=res.map((w,i)=>({d:i+1,dow:new Date(y,mo,i+1).getDay(),w}));
+    render();
+    const off=ROWS.filter(r=>!r.w).length;
+    let run=0,mx=0;ROWS.forEach(r=>{run=r.w?run+1:0;mx=Math.max(mx,run);});
+    msg.className='ok';msg.textContent='מוכן: ימי מנוחה '+off+', מקסימום ימי עבודה ברצף '+mx+'.';
+  }catch(e){msg.className='er';msg.textContent=typeof e==='string'?e:'שגיאה ביצירת הדוח, נסו שוב.';}
+}
+
+/* ---- כתיבת קובץ xlsx ללא ספריות חיצוניות ---- */
+const CRC=(()=>{const t=[];for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0;}return t;})();
+function crc32(b){let c=0xFFFFFFFF;for(let i=0;i<b.length;i++)c=CRC[(c^b[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0;}
+function zip(files){
+  const enc=new TextEncoder(),parts=[],cen=[];let off=0;
+  for(const f of files){
+    const nb=enc.encode(f.name),db=enc.encode(f.data),crc=crc32(db);
+    const l=new Uint8Array(30+nb.length),v=new DataView(l.buffer);
+    v.setUint32(0,0x04034b50,true);v.setUint16(4,20,true);v.setUint16(6,0x0800,true);v.setUint16(12,0x21,true);
+    v.setUint32(14,crc,true);v.setUint32(18,db.length,true);v.setUint32(22,db.length,true);v.setUint16(26,nb.length,true);
+    l.set(nb,30);parts.push(l,db);
+    const c=new Uint8Array(46+nb.length),w=new DataView(c.buffer);
+    w.setUint32(0,0x02014b50,true);w.setUint16(4,20,true);w.setUint16(6,20,true);w.setUint16(8,0x0800,true);w.setUint16(14,0x21,true);
+    w.setUint32(16,crc,true);w.setUint32(20,db.length,true);w.setUint32(24,db.length,true);w.setUint16(28,nb.length,true);
+    w.setUint32(42,off,true);c.set(nb,46);cen.push(c);
+    off+=l.length+db.length;
+  }
+  const cs=cen.reduce((s,c)=>s+c.length,0),e=new Uint8Array(22),x=new DataView(e.buffer);
+  x.setUint32(0,0x06054b50,true);x.setUint16(8,files.length,true);x.setUint16(10,files.length,true);x.setUint32(12,cs,true);x.setUint32(16,off,true);
+  return new Blob([...parts,...cen,e],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+}
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function buildXlsx(){
+  const [y,mo]=YM,n=ROWS.length,t=n+2;
+  const str=(r,v,s)=>'<c r="'+r+'" s="'+s+'" t="inlineStr"><is><t>'+esc(v)+'</t></is></c>';
+  const val=(r,v,s,f)=>'<c r="'+r+'" s="'+s+'">'+(f?'<f>'+f+'</f>':'')+'<v>'+v+'</v></c>';
+  let rows='<row r="1">'+str('A1','תאריך ',5)+str('B1','יום',5)+str('C1','כניסה',5)+str('D1','יציאה',5)+str('E1','סה"כ',5)+str('F1','חודשי',5)+val('G1',1.25,4)+val('H1',1.5,4)+'</row>';
+  ROWS.forEach((r,i)=>{
+    const R=i+2,s=r.w?r.w.s/1440:0,e=r.w?r.w.e/1440:0;
+    const ser=(Date.UTC(y,mo,r.d)-Date.UTC(1899,11,30))/864e5;
+    rows+='<row r="'+R+'">'+val('A'+R,ser,1)+str('B'+R,DN[r.dow],0)+val('C'+R,s,2)+val('D'+R,e,2)+
+      val('E'+R,e-s,2,'D'+R+'-C'+R)+val('F'+R,r.f,3,'E'+R+'*24')+
+      val('G'+R,r.g,3,'MAX(MIN(F'+R+'-8,2),0)')+val('H'+R,r.h,3,'MAX(MIN(F'+R+'-10,2),0)')+'</row>';
+  });
+  const S=k=>ROWS.reduce((s,r)=>s+r[k],0);
+  rows+='<row r="'+t+'">'+str('D'+t,'סה"כ חודשי',5)+val('F'+t,S('f'),6,'SUM(F2:F'+(n+1)+')')+val('G'+t,S('g'),6,'SUM(G2:G'+(n+1)+')')+val('H'+t,S('h'),6,'SUM(H2:H'+(n+1)+')')+'</row>';
+  const NS='http://schemas.openxmlformats.org/spreadsheetml/2006/main',RN='http://schemas.openxmlformats.org/officeDocument/2006/relationships',PR='http://schemas.openxmlformats.org/package/2006/relationships';
+  const H='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n';
+  const al='<alignment horizontal="center"/>';
+  const xf=(nf,fo)=>'<xf numFmtId="'+nf+'" fontId="'+fo+'" fillId="0" borderId="0" xfId="0" applyNumberFormat="1" applyFont="1" applyAlignment="1">'+al+'</xf>';
+  return zip([
+    {name:'[Content_Types].xml',data:H+'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>'},
+    {name:'_rels/.rels',data:H+'<Relationships xmlns="'+PR+'"><Relationship Id="rId1" Type="'+RN+'/officeDocument" Target="xl/workbook.xml"/></Relationships>'},
+    {name:'xl/workbook.xml',data:H+'<workbook xmlns="'+NS+'" xmlns:r="'+RN+'"><sheets><sheet name="גיליון1" sheetId="1" r:id="rId1"/></sheets><calcPr fullCalcOnLoad="1"/></workbook>'},
+    {name:'xl/_rels/workbook.xml.rels',data:H+'<Relationships xmlns="'+PR+'"><Relationship Id="rId1" Type="'+RN+'/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="'+RN+'/styles" Target="styles.xml"/></Relationships>'},
+    {name:'xl/styles.xml',data:H+'<styleSheet xmlns="'+NS+'"><numFmts count="2"><numFmt numFmtId="164" formatCode="dd/mm/yyyy"/><numFmt numFmtId="165" formatCode="h:mm"/></numFmts><fonts count="2"><font><sz val="11"/><name val="Arial"/></font><font><b/><sz val="11"/><name val="Arial"/></font></fonts><fills count="2"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill></fills><borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="7">'+xf(0,0)+xf(164,0)+xf(165,0)+xf(2,0)+xf(9,0)+xf(0,1)+xf(2,1)+'</cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>'},
+    {name:'xl/worksheets/sheet1.xml',data:H+'<worksheet xmlns="'+NS+'"><sheetViews><sheetView workbookViewId="0" rightToLeft="1"/></sheetViews><cols><col min="1" max="1" width="13" customWidth="1"/><col min="2" max="8" width="10" customWidth="1"/></cols><sheetData>'+rows+'</sheetData></worksheet>'}
+  ]);
+}
+function download(){
+  if(!ROWS.length)return;
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(buildXlsx());
+  a.download='timesheet_'+YM[0]+'-'+p2(YM[1]+1)+'.xlsx';
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+}
+const now=new Date();$('m').value=now.getFullYear()+'-'+p2(now.getMonth()+1);
+$('go').onclick=generate;$('dl').onclick=download;
+generate();
+
+// PWA: inline service worker (data URL) — кэширует сам страницу
+if ('serviceWorker' in navigator) {
+  const swCode = `
+    const CACHE='timesheet-v1';
+    self.addEventListener('install',e=>{self.skipWaiting();});
+    self.addEventListener('activate',e=>{e.waitUntil(self.clients.claim());});
+    self.addEventListener('fetch',e=>{
+      e.respondWith(
+        caches.match(e.request).then(r=>r||fetch(e.request).then(resp=>{
+          const copy=resp.clone();
+          caches.open(CACHE).then(c=>c.put(e.request,copy)).catch(()=>{});
+          return resp;
+        }).catch(()=>caches.match('./index.html')))
+      );
+    });
+  `;
+  const blob = new Blob([swCode], {type:'application/javascript'});
+  const swUrl = URL.createObjectURL(blob);
+  navigator.serviceWorker.register(swUrl).catch(()=>{});
+}
+</script>
+</body>
+</html>
